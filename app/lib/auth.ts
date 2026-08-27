@@ -1,7 +1,9 @@
 import { betterAuth } from "better-auth";
 import { prisma } from './prisma';
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { sendEmail } from '../api/send/route';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.REDEND_API_KEY);
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -14,12 +16,11 @@ export const auth = betterAuth({
   emailVerification: {
     sendOnSignUp: true,
     sendVerificationEmail: async ({ user, url }) => {
-      await sendEmail({
-        emailDe: 'onboarding@resend.dev',
-        emailPara: user.email!,
-        subjetivo: "Verifique seu email",
-        primeiroNome: user.name,
-        urlEmail: url
+      await resend.emails.send({
+        from: 'Acme <onboarding@resend.dev>',
+        to: user.email!,
+        subject: "Verifique seu email",
+        html: `<p>Verifique seu email <a href=${url}>Verifique</a></p>`
       })
     }
   }
