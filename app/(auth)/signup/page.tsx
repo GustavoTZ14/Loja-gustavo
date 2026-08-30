@@ -1,6 +1,7 @@
 "use client";
 import { authClient } from "@/lib/auth-client"; //import the auth client
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Page() {
   const [email, setEmail] = useState<string>("");
@@ -24,27 +25,51 @@ export default function Page() {
 
   return (
     <>
-      <form onSubmit={sub}>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+      <div className="grid grid-cols-2 w-full h-screen p-5">
+        <div className="flex justify-center items-center w-full h-full col-span-1">
+          <div className="w-130 p-10">
+            <div className="w-full text-center mb-10">
+              <h1 className="font-serif font-bold text-2xl text-gray-500">Criar uma conta</h1>
+            </div>
+            <form onSubmit={sub} className="grid gap-2">
+              <label htmlFor="name" className="font-serif text-sm text-gray-500 ml-1">Nome</label>
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="outline-1 outline-gray-300 rounded-sm p-2 text-md font-sans text-gray-500"
+                placeholder="digite seu nome"
+              />
+              <label htmlFor="email" className="font-serif text-sm text-gray-500 ml-1">Email</label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="outline-1 outline-gray-300 rounded-sm p-2 text-md font-sans text-gray-500"
+                placeholder="digite seu email"
+              />
+              <label htmlFor="senha" className="font-serif text-sm text-gray-500 ml-1">Senha</label>
+              <input
+                type="password"
+                id="senha"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="outline-1 outline-gray-300 rounded-sm p-2 text-md font-sans text-gray-500"
+                placeholder="crie uma senha"
+              />
 
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-        <button type="submit">Cadastrar</button>
-      </form>
+              <button type="submit" className="bg-gray-500 rounded-sm p-2 mt-10 text-white font-serif cursor-pointer">Cadastrar</button>
+            </form>
+          </div>
+        </div>
+        <div className="w-full h-full col-span-1">
+          <div className="relative w-full h-full">
+            <Image src="/imagens/camamesaebanho_1.webp" alt="cama" fill className="object-cover rounded-2xl" />
+          </div>
+        </div>
+      </div>
     </>
   )
 }
