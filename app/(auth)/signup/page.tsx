@@ -25,7 +25,7 @@ export default function Page() {
 
   return (
     <>
-      <div className="grid grid-cols-2 w-full h-screen p-5">
+      <div className="grid grid-cols-1 w-full h-screen p-5">
         <div className="flex justify-center items-center w-full h-full col-span-1">
           <div className="w-130 p-10">
             <div className="w-full text-center mb-10">
@@ -66,11 +66,6 @@ export default function Page() {
 
               <button type="submit" className="bg-gray-500 rounded-sm p-2 mt-10 text-white font-serif cursor-pointer">Cadastrar</button>
             </form>
-          </div>
-        </div>
-        <div className="w-full h-full col-span-1">
-          <div className="relative w-full h-full">
-            <Image src="/imagens/camamesaebanho_1.webp" alt="cama" fill className="object-cover rounded-2xl" />
           </div>
         </div>
       </div>
