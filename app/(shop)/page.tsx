@@ -1,4 +1,5 @@
-import HeroImage from '../components/HeroComponent';
+
+import HeroImage from '../../components/HeroComponent';
 
 export default function Home() {
   return (

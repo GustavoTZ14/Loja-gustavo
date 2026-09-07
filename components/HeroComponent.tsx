@@ -2,9 +2,9 @@ import Image from 'next/image';
 
 export default function Hero() {
   return (
-    <div className='grid justify-center'>
+    <div className='bg-[#f5f5f5]'>
       <div className='w-full'>
-        <Image src='/imagens/heroImage2.png' alt='hero' width={1200} height={500} />
+        <Image src='/imagens/heroImage1.png' alt='hero' width={1920} height={500} />
       </div>
     </div>
   )

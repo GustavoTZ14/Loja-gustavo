@@ -2,10 +2,12 @@
 import { authClient } from "@/lib/auth-client"
 import { redirect } from "next/navigation"
 
-export default function User(){
-  async function SignOut(){
+export default function User() {
+  const { data: session } = authClient.useSession();
+
+  async function SignOut() {
     await authClient.signOut({
-      fetchOptions:{
+      fetchOptions: {
         onSuccess: () => {
           redirect('/signup')
         }
@@ -14,7 +16,8 @@ export default function User(){
   }
   return (
     <>
-      <h1>Usuario</h1>
+      <h1>Bem vindo,</h1>
+      <h1>{session!.user.name}</h1>
       <span onClick={SignOut} className="cursor-pointer">
         Sair
       </span>

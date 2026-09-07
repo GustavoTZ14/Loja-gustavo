@@ -74,3 +74,77 @@ model Verification {
   @@index([identifier])
   @@map("verification")
 }
+
+model Product {
+  id          String   @id @default(cuid())
+
+  name        String
+  slug        String   @unique
+  description String?
+
+  price       Decimal  @db.Decimal(10, 2)
+  comparePrice Decimal? @db.Decimal(10, 2)
+
+  sku         String?  @unique
+  stock       Int      @default(0)
+
+  active      Boolean  @default(true)
+  featured    Boolean  @default(false)
+
+  categoryId  String?
+  category    Category? @relation(fields: [categoryId], references: [id])
+
+  images      ProductImage[]
+  variants    ProductVariant[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([categoryId])
+  @@index([active])
+  @@index([featured])
+}
+
+model ProductImage {
+  id        String  @id @default(cuid())
+
+  url       String
+  alt       String?
+  position  Int     @default(0)
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+}
+
+model ProductVariant {
+  id        String  @id @default(cuid())
+
+  name      String?
+  color     String?
+  size      String?
+
+  sku       String? @unique
+  stock     Int     @default(0)
+
+  price     Decimal? @db.Decimal(10, 2)
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+}
+
+model Category {
+  id          String    @id @default(cuid())
+
+  name        String
+  slug        String    @unique
+  description String?
+
+  products    Product[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
