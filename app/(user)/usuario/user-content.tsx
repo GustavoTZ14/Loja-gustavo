@@ -9,7 +9,7 @@ export default function UserContent() {
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
-          redirect('/signup')
+          redirect('/signin')
         }
       }
     })
@@ -17,7 +17,7 @@ export default function UserContent() {
   return (
     <>
       <h1>Bem vindo,</h1>
-      <h1>{session!.user.name}</h1>
+      <h1>{session?.user.name}</h1>
       <span onClick={SignOut} className="cursor-pointer">
         Sair
       </span>

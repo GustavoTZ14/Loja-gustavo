@@ -2,6 +2,7 @@
 import { authClient } from "@/lib/auth-client"; //import the auth client
 import { useState } from "react";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 export default function Page() {
   const [email, setEmail] = useState<string>("");
@@ -15,8 +16,10 @@ export default function Page() {
       email, // user email address
       password, // user password -> min 8 characters by default
       name, // user display name
-      callbackURL: "http://localhost:3000/"
     }, {
+      onSuccess: () => {
+        redirect("/signin")
+      },
       onError: (ctx) => {
         alert(ctx.error.message);
       },
@@ -29,8 +32,8 @@ export default function Page() {
         <div className="flex justify-center items-center w-full h-full col-span-1">
           <div className="w-130 p-10">
             <div className="w-full text-center mb-10">
-              <div className="flex justify-center w-full h-50">
-                <img src="/logo.png" alt="logo" className="w-30 h-30 rounded-xl" />
+              <div className="flex justify-center w-full mb-10">
+                <Image src="/logo1.png" alt="logo" width={150} height={70} />
               </div>
               <h1 className="font-serif font-bold text-2xl text-gray-500 mb-5">Criar uma conta</h1>
               <p className="font-serif text-sm text-gray-400">Cadastre-se para acompanhar seus pedidos e aproveitar nossas ofertas.</p>
@@ -63,8 +66,10 @@ export default function Page() {
                 className="outline-1 outline-gray-300 rounded-sm p-2 text-md font-sans text-gray-500"
                 placeholder="crie uma senha"
               />
-
-              <button type="submit" className="bg-gray-500 rounded-sm p-2 mt-10 text-white font-serif cursor-pointer">Cadastrar</button>
+              <div className="mb-10">
+                <p className="text-xs">Já tem uma conta?</p>
+              </div>
+              <button type="submit" className="bg-gray-500 rounded-sm p-2 m-auto text-white font-serif cursor-pointer w-50">Cadastrar</button>
             </form>
           </div>
         </div>

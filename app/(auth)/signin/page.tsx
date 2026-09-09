@@ -27,8 +27,8 @@ export default function Page() {
         <div className="flex justify-center items-center w-full h-full col-span-1">
           <div className="w-130 p-10">
             <div className="w-full text-center mb-10">
-              <div className="flex justify-center w-full h-40">
-                <img src="/logo.png" alt="logo" className="w-30 h-30 rounded-xl" />
+              <div className="flex justify-center w-full mb-10">
+                <Image src="/logo1.png" alt="logo" width={150} height={70} />
               </div>
               <h1 className="font-serif font-bold text-2xl text-gray-500 mb-5">Acesse sua conta</h1>
               <p className="font-serif text-sm text-gray-400">Acesse sua conta para acompanhar pedidos e aproveitar uma experiência personalizada.</p>
