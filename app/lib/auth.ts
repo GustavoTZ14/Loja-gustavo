@@ -1,13 +1,12 @@
 import { betterAuth } from "better-auth";
-import { prisma } from './prisma';
-import { prismaAdapter } from "better-auth/adapters/prisma";
 import { Resend } from 'resend';
+import { Pool } from "pg";
 
 const resend = new Resend(process.env.REDEND_API_KEY);
 
 export const auth = betterAuth({
-  database: prismaAdapter(prisma, {
-    provider: "postgresql"
+  database: new Pool({
+    connectionString: process.env.DATABASE_URL!,
   }),
   emailAndPassword: {
     enabled: true,

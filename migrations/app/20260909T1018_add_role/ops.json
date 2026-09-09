@@ -1,0 +1,1126 @@
+[
+  {
+    "id": "schema.public",
+    "label": "Create schema \"public\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres"
+    },
+    "precheck": [],
+    "execute": [
+      {
+        "description": "Create schema \"public\"",
+        "sql": "CREATE SCHEMA IF NOT EXISTS \"public\"",
+        "params": []
+      }
+    ],
+    "postcheck": []
+  },
+  {
+    "id": "table.Category",
+    "label": "Create table \"Category\"",
+    "summary": "Creates table \"Category\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "Category"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"Category\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Category\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"Category\"",
+        "sql": "CREATE TABLE \"public\".\"Category\" (\n  \"createdAt\" timestamp(3) DEFAULT (now()) NOT NULL,\n  \"description\" text,\n  \"id\" text NOT NULL,\n  \"name\" text NOT NULL,\n  \"slug\" text NOT NULL,\n  \"updatedAt\" timestamp(3) NOT NULL,\n  CONSTRAINT \"Category_pkey\" PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"Category\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Category\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.Product",
+    "label": "Create table \"Product\"",
+    "summary": "Creates table \"Product\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "Product"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"Product\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Product\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"Product\"",
+        "sql": "CREATE TABLE \"public\".\"Product\" (\n  \"active\" bool DEFAULT true NOT NULL,\n  \"categoryId\" text,\n  \"comparePrice\" numeric(10,2),\n  \"createdAt\" timestamp(3) DEFAULT (now()) NOT NULL,\n  \"description\" text,\n  \"featured\" bool DEFAULT false NOT NULL,\n  \"id\" text NOT NULL,\n  \"name\" text NOT NULL,\n  \"price\" numeric(10,2) NOT NULL,\n  \"sku\" text,\n  \"slug\" text NOT NULL,\n  \"stock\" int4 DEFAULT 0 NOT NULL,\n  \"updatedAt\" timestamp(3) NOT NULL,\n  CONSTRAINT \"Product_pkey\" PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"Product\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Product\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.ProductImage",
+    "label": "Create table \"ProductImage\"",
+    "summary": "Creates table \"ProductImage\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "ProductImage"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"ProductImage\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"ProductImage\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"ProductImage\"",
+        "sql": "CREATE TABLE \"public\".\"ProductImage\" (\n  \"alt\" text,\n  \"id\" text NOT NULL,\n  \"position\" int4 DEFAULT 0 NOT NULL,\n  \"productId\" text NOT NULL,\n  \"url\" text NOT NULL,\n  CONSTRAINT \"ProductImage_pkey\" PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"ProductImage\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"ProductImage\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.ProductVariant",
+    "label": "Create table \"ProductVariant\"",
+    "summary": "Creates table \"ProductVariant\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "ProductVariant"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"ProductVariant\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"ProductVariant\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"ProductVariant\"",
+        "sql": "CREATE TABLE \"public\".\"ProductVariant\" (\n  \"color\" text,\n  \"id\" text NOT NULL,\n  \"name\" text,\n  \"price\" numeric(10,2),\n  \"productId\" text NOT NULL,\n  \"size\" text,\n  \"sku\" text,\n  \"stock\" int4 DEFAULT 0 NOT NULL,\n  CONSTRAINT \"ProductVariant_pkey\" PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"ProductVariant\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"ProductVariant\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table._prisma_migrations",
+    "label": "Create table \"_prisma_migrations\"",
+    "summary": "Creates table \"_prisma_migrations\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "_prisma_migrations"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"_prisma_migrations\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"_prisma_migrations\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"_prisma_migrations\"",
+        "sql": "CREATE TABLE \"public\".\"_prisma_migrations\" (\n  \"applied_steps_count\" int4 DEFAULT 0 NOT NULL,\n  \"checksum\" character varying(64) NOT NULL,\n  \"finished_at\" timestamptz,\n  \"id\" character varying(36) NOT NULL,\n  \"logs\" text,\n  \"migration_name\" character varying(255) NOT NULL,\n  \"rolled_back_at\" timestamptz,\n  \"started_at\" timestamptz DEFAULT (now()) NOT NULL,\n  CONSTRAINT \"_prisma_migrations_pkey\" PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"_prisma_migrations\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"_prisma_migrations\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.account",
+    "label": "Create table \"account\"",
+    "summary": "Creates table \"account\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "account"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"account\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"account\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"account\"",
+        "sql": "CREATE TABLE \"public\".\"account\" (\n  \"accessToken\" text,\n  \"accessTokenExpiresAt\" timestamp(3),\n  \"accountId\" text NOT NULL,\n  \"createdAt\" timestamp(3) DEFAULT (now()) NOT NULL,\n  \"id\" text NOT NULL,\n  \"idToken\" text,\n  \"password\" text,\n  \"providerId\" text NOT NULL,\n  \"refreshToken\" text,\n  \"refreshTokenExpiresAt\" timestamp(3),\n  \"scope\" text,\n  \"updatedAt\" timestamp(3) NOT NULL,\n  \"userId\" text NOT NULL,\n  CONSTRAINT \"account_pkey\" PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"account\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"account\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.session",
+    "label": "Create table \"session\"",
+    "summary": "Creates table \"session\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "session"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"session\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"session\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"session\"",
+        "sql": "CREATE TABLE \"public\".\"session\" (\n  \"createdAt\" timestamp(3) DEFAULT (now()) NOT NULL,\n  \"expiresAt\" timestamp(3) NOT NULL,\n  \"id\" text NOT NULL,\n  \"ipAddress\" text,\n  \"token\" text NOT NULL,\n  \"updatedAt\" timestamp(3) NOT NULL,\n  \"userAgent\" text,\n  \"userId\" text NOT NULL,\n  CONSTRAINT \"session_pkey\" PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"session\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"session\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.user",
+    "label": "Create table \"user\"",
+    "summary": "Creates table \"user\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "user"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"user\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"user\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"user\"",
+        "sql": "CREATE TABLE \"public\".\"user\" (\n  \"createdAt\" timestamp(3) DEFAULT (now()) NOT NULL,\n  \"email\" text NOT NULL,\n  \"emailVerified\" bool DEFAULT false NOT NULL,\n  \"id\" text NOT NULL,\n  \"image\" text,\n  \"name\" text NOT NULL,\n  \"role\" text DEFAULT 'user' NOT NULL,\n  \"updatedAt\" timestamp(3) NOT NULL,\n  CONSTRAINT \"user_pkey\" PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"user\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"user\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.verification",
+    "label": "Create table \"verification\"",
+    "summary": "Creates table \"verification\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "verification"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"verification\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"verification\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"verification\"",
+        "sql": "CREATE TABLE \"public\".\"verification\" (\n  \"createdAt\" timestamp(3) DEFAULT (now()) NOT NULL,\n  \"expiresAt\" timestamp(3) NOT NULL,\n  \"id\" text NOT NULL,\n  \"identifier\" text NOT NULL,\n  \"updatedAt\" timestamp(3) NOT NULL,\n  \"value\" text NOT NULL,\n  CONSTRAINT \"verification_pkey\" PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"verification\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"verification\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Category.Category_slug_key",
+    "label": "Create index \"Category_slug_key\" on \"Category\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "Category_slug_key",
+        "table": "Category"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"Category_slug_key\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Category_slug_key\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"Category_slug_key\"",
+        "sql": "CREATE UNIQUE INDEX \"Category_slug_key\" ON \"public\".\"Category\" (\"slug\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"Category_slug_key\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Category_slug_key\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Product.Product_active_idx",
+    "label": "Create index \"Product_active_idx\" on \"Product\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "Product_active_idx",
+        "table": "Product"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"Product_active_idx\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Product_active_idx\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"Product_active_idx\"",
+        "sql": "CREATE INDEX \"Product_active_idx\" ON \"public\".\"Product\" (\"active\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"Product_active_idx\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Product_active_idx\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Product.Product_categoryId_idx",
+    "label": "Create index \"Product_categoryId_idx\" on \"Product\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "Product_categoryId_idx",
+        "table": "Product"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"Product_categoryId_idx\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Product_categoryId_idx\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"Product_categoryId_idx\"",
+        "sql": "CREATE INDEX \"Product_categoryId_idx\" ON \"public\".\"Product\" (\"categoryId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"Product_categoryId_idx\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Product_categoryId_idx\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Product.Product_featured_idx",
+    "label": "Create index \"Product_featured_idx\" on \"Product\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "Product_featured_idx",
+        "table": "Product"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"Product_featured_idx\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Product_featured_idx\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"Product_featured_idx\"",
+        "sql": "CREATE INDEX \"Product_featured_idx\" ON \"public\".\"Product\" (\"featured\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"Product_featured_idx\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Product_featured_idx\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Product.Product_sku_key",
+    "label": "Create index \"Product_sku_key\" on \"Product\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "Product_sku_key",
+        "table": "Product"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"Product_sku_key\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Product_sku_key\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"Product_sku_key\"",
+        "sql": "CREATE UNIQUE INDEX \"Product_sku_key\" ON \"public\".\"Product\" (\"sku\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"Product_sku_key\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Product_sku_key\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Product.Product_slug_key",
+    "label": "Create index \"Product_slug_key\" on \"Product\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "Product_slug_key",
+        "table": "Product"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"Product_slug_key\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Product_slug_key\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"Product_slug_key\"",
+        "sql": "CREATE UNIQUE INDEX \"Product_slug_key\" ON \"public\".\"Product\" (\"slug\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"Product_slug_key\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Product_slug_key\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.ProductImage.ProductImage_productId_idx",
+    "label": "Create index \"ProductImage_productId_idx\" on \"ProductImage\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "ProductImage_productId_idx",
+        "table": "ProductImage"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"ProductImage_productId_idx\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"ProductImage_productId_idx\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"ProductImage_productId_idx\"",
+        "sql": "CREATE INDEX \"ProductImage_productId_idx\" ON \"public\".\"ProductImage\" (\"productId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"ProductImage_productId_idx\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"ProductImage_productId_idx\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.ProductVariant.ProductVariant_productId_idx",
+    "label": "Create index \"ProductVariant_productId_idx\" on \"ProductVariant\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "ProductVariant_productId_idx",
+        "table": "ProductVariant"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"ProductVariant_productId_idx\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"ProductVariant_productId_idx\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"ProductVariant_productId_idx\"",
+        "sql": "CREATE INDEX \"ProductVariant_productId_idx\" ON \"public\".\"ProductVariant\" (\"productId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"ProductVariant_productId_idx\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"ProductVariant_productId_idx\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.ProductVariant.ProductVariant_sku_key",
+    "label": "Create index \"ProductVariant_sku_key\" on \"ProductVariant\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "ProductVariant_sku_key",
+        "table": "ProductVariant"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"ProductVariant_sku_key\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"ProductVariant_sku_key\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"ProductVariant_sku_key\"",
+        "sql": "CREATE UNIQUE INDEX \"ProductVariant_sku_key\" ON \"public\".\"ProductVariant\" (\"sku\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"ProductVariant_sku_key\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"ProductVariant_sku_key\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.account.account_userId_idx",
+    "label": "Create index \"account_userId_idx\" on \"account\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "account_userId_idx",
+        "table": "account"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"account_userId_idx\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"account_userId_idx\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"account_userId_idx\"",
+        "sql": "CREATE INDEX \"account_userId_idx\" ON \"public\".\"account\" (\"userId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"account_userId_idx\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"account_userId_idx\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.session.session_token_key",
+    "label": "Create index \"session_token_key\" on \"session\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "session_token_key",
+        "table": "session"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"session_token_key\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"session_token_key\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"session_token_key\"",
+        "sql": "CREATE UNIQUE INDEX \"session_token_key\" ON \"public\".\"session\" (\"token\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"session_token_key\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"session_token_key\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.session.session_userId_idx",
+    "label": "Create index \"session_userId_idx\" on \"session\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "session_userId_idx",
+        "table": "session"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"session_userId_idx\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"session_userId_idx\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"session_userId_idx\"",
+        "sql": "CREATE INDEX \"session_userId_idx\" ON \"public\".\"session\" (\"userId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"session_userId_idx\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"session_userId_idx\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.user.user_email_key",
+    "label": "Create index \"user_email_key\" on \"user\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "user_email_key",
+        "table": "user"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"user_email_key\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"user_email_key\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"user_email_key\"",
+        "sql": "CREATE UNIQUE INDEX \"user_email_key\" ON \"public\".\"user\" (\"email\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"user_email_key\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"user_email_key\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.verification.verification_identifier_idx",
+    "label": "Create index \"verification_identifier_idx\" on \"verification\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "verification_identifier_idx",
+        "table": "verification"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"verification_identifier_idx\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"verification_identifier_idx\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"verification_identifier_idx\"",
+        "sql": "CREATE INDEX \"verification_identifier_idx\" ON \"public\".\"verification\" (\"identifier\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"verification_identifier_idx\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"verification_identifier_idx\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.Product.Product_categoryId_fkey",
+    "label": "Add foreign key \"Product_categoryId_fkey\" on \"Product\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "foreignKey",
+        "name": "Product_categoryId_fkey",
+        "table": "Product"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"Product_categoryId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Product_categoryId_fkey",
+          "public",
+          "\"public\".\"Product\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"Product_categoryId_fkey\"",
+        "sql": "ALTER TABLE \"public\".\"Product\"\nADD CONSTRAINT \"Product_categoryId_fkey\"\nFOREIGN KEY (\"categoryId\")\nREFERENCES \"public\".\"Category\" (\"id\")\nON DELETE SET NULL\nON UPDATE CASCADE"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"Product_categoryId_fkey\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Product_categoryId_fkey",
+          "public",
+          "\"public\".\"Product\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.ProductImage.ProductImage_productId_fkey",
+    "label": "Add foreign key \"ProductImage_productId_fkey\" on \"ProductImage\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "foreignKey",
+        "name": "ProductImage_productId_fkey",
+        "table": "ProductImage"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"ProductImage_productId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "ProductImage_productId_fkey",
+          "public",
+          "\"public\".\"ProductImage\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"ProductImage_productId_fkey\"",
+        "sql": "ALTER TABLE \"public\".\"ProductImage\"\nADD CONSTRAINT \"ProductImage_productId_fkey\"\nFOREIGN KEY (\"productId\")\nREFERENCES \"public\".\"Product\" (\"id\")\nON DELETE CASCADE\nON UPDATE CASCADE"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"ProductImage_productId_fkey\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "ProductImage_productId_fkey",
+          "public",
+          "\"public\".\"ProductImage\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.ProductVariant.ProductVariant_productId_fkey",
+    "label": "Add foreign key \"ProductVariant_productId_fkey\" on \"ProductVariant\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "foreignKey",
+        "name": "ProductVariant_productId_fkey",
+        "table": "ProductVariant"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"ProductVariant_productId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "ProductVariant_productId_fkey",
+          "public",
+          "\"public\".\"ProductVariant\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"ProductVariant_productId_fkey\"",
+        "sql": "ALTER TABLE \"public\".\"ProductVariant\"\nADD CONSTRAINT \"ProductVariant_productId_fkey\"\nFOREIGN KEY (\"productId\")\nREFERENCES \"public\".\"Product\" (\"id\")\nON DELETE CASCADE\nON UPDATE CASCADE"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"ProductVariant_productId_fkey\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "ProductVariant_productId_fkey",
+          "public",
+          "\"public\".\"ProductVariant\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.account.account_userId_fkey",
+    "label": "Add foreign key \"account_userId_fkey\" on \"account\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "foreignKey",
+        "name": "account_userId_fkey",
+        "table": "account"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"account_userId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "account_userId_fkey",
+          "public",
+          "\"public\".\"account\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"account_userId_fkey\"",
+        "sql": "ALTER TABLE \"public\".\"account\"\nADD CONSTRAINT \"account_userId_fkey\"\nFOREIGN KEY (\"userId\")\nREFERENCES \"public\".\"user\" (\"id\")\nON DELETE CASCADE\nON UPDATE CASCADE"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"account_userId_fkey\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "account_userId_fkey",
+          "public",
+          "\"public\".\"account\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.session.session_userId_fkey",
+    "label": "Add foreign key \"session_userId_fkey\" on \"session\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "foreignKey",
+        "name": "session_userId_fkey",
+        "table": "session"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"session_userId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "session_userId_fkey",
+          "public",
+          "\"public\".\"session\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"session_userId_fkey\"",
+        "sql": "ALTER TABLE \"public\".\"session\"\nADD CONSTRAINT \"session_userId_fkey\"\nFOREIGN KEY (\"userId\")\nREFERENCES \"public\".\"user\" (\"id\")\nON DELETE CASCADE\nON UPDATE CASCADE"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"session_userId_fkey\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "session_userId_fkey",
+          "public",
+          "\"public\".\"session\""
+        ]
+      }
+    ]
+  }
+]

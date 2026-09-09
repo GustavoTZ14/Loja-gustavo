@@ -1,26 +1,18 @@
-"use client";
-import { authClient } from "@/lib/auth-client"
 import { redirect } from "next/navigation"
+import UserContent from "./user-content";
+import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
 
-export default function User() {
-  const { data: session } = authClient.useSession();
+export default async function User() {
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
 
-  async function SignOut() {
-    await authClient.signOut({
-      fetchOptions: {
-        onSuccess: () => {
-          redirect('/signup')
-        }
-      }
-    })
+  if (!session) {
+    redirect('/signin')
   }
+
   return (
-    <>
-      <h1>Bem vindo,</h1>
-      <h1>{session!.user.name}</h1>
-      <span onClick={SignOut} className="cursor-pointer">
-        Sair
-      </span>
-    </>
+    <UserContent />
   )
 }
