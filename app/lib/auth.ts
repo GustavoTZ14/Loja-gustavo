@@ -22,5 +22,14 @@ export const auth = betterAuth({
         html: `<p>Verifique seu email <a href=${url}>Verifique</a></p>`
       })
     }
-  }
+  },
+  user: {
+    additionalFields: {
+      role: {
+        type: "string",
+        defaultValue: "user",
+        input: false,
+      },
+    },
+  },
 });
