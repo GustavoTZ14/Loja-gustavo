@@ -13,6 +13,6 @@ export default async function User() {
   }
 
   return (
-    <UserContent />
+    <UserContent userRole={session.user.role} />
   )
 }

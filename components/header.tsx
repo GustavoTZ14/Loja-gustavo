@@ -16,11 +16,8 @@ export default function Header() {
   }
 
   return (
-    <header className='p-5 bg-[#f5f5f5]'>
+    <header className='pl-10 pr-10 pt-5 pb-5 bg-[#f5f5f5]'>
       <nav className='flex justify-around items-center'>
-        <div>
-          <TextAlignJustify size={22} className='text-gray-500' />
-        </div>
         <div>
           <a href="/">
             <Image src='/logo1.png' alt='logo' width={150} height={70} className='rounded-xl' />

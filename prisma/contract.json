@@ -434,16 +434,6 @@
                   }
                 }
               },
-              "createdAt": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/timestamp-temporal@1",
-                  "kind": "scalar",
-                  "typeParams": {
-                    "precision": 3
-                  }
-                }
-              },
               "description": {
                 "nullable": true,
                 "type": {
@@ -502,16 +492,6 @@
                 "type": {
                   "codecId": "pg/int4@1",
                   "kind": "scalar"
-                }
-              },
-              "updatedAt": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/timestamp-temporal@1",
-                  "kind": "scalar",
-                  "typeParams": {
-                    "precision": 3
-                  }
                 }
               }
             },
@@ -573,9 +553,6 @@
                 "comparePrice": {
                   "column": "comparePrice"
                 },
-                "createdAt": {
-                  "column": "createdAt"
-                },
                 "description": {
                   "column": "description"
                 },
@@ -599,9 +576,6 @@
                 },
                 "stock": {
                   "column": "stock"
-                },
-                "updatedAt": {
-                  "column": "updatedAt"
                 }
               },
               "namespaceId": "public",
@@ -1215,18 +1189,6 @@
                     "scale": 2
                   }
                 },
-                "createdAt": {
-                  "codecId": "pg/timestamp-temporal@1",
-                  "default": {
-                    "expression": "now()",
-                    "kind": "function"
-                  },
-                  "nativeType": "timestamp",
-                  "nullable": false,
-                  "typeParams": {
-                    "precision": 3
-                  }
-                },
                 "description": {
                   "codecId": "pg/text@1",
                   "nativeType": "text",
@@ -1278,14 +1240,6 @@
                   },
                   "nativeType": "int4",
                   "nullable": false
-                },
-                "updatedAt": {
-                  "codecId": "pg/timestamp-temporal@1",
-                  "nativeType": "timestamp",
-                  "nullable": false,
-                  "typeParams": {
-                    "precision": 3
-                  }
                 }
               },
               "foreignKeys": [
@@ -1962,7 +1916,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "80003a59f7ea102da1c1bdc6ee2c5d891d36b9f9fc61c4c4cb1efa8e96aa6099"
+    "storageHash": "dcb58f7483358f5b653a76f71c6643d3f5b802fb2d9b54741ebcc0bddf0eb761"
   },
   "capabilities": {
     "postgres": {

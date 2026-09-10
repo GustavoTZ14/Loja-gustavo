@@ -1,0 +1,86 @@
+[
+  {
+    "id": "dropColumn.Product.createdAt",
+    "label": "Drop column \"createdAt\" from \"Product\"",
+    "operationClass": "destructive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "column",
+        "name": "createdAt",
+        "table": "Product"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure column \"createdAt\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "Product",
+          "createdAt"
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "drop column \"createdAt\"",
+        "sql": "ALTER TABLE \"public\".\"Product\" DROP COLUMN \"createdAt\""
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify column \"createdAt\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "Product",
+          "createdAt"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dropColumn.Product.updatedAt",
+    "label": "Drop column \"updatedAt\" from \"Product\"",
+    "operationClass": "destructive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "column",
+        "name": "updatedAt",
+        "table": "Product"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure column \"updatedAt\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "Product",
+          "updatedAt"
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "drop column \"updatedAt\"",
+        "sql": "ALTER TABLE \"public\".\"Product\" DROP COLUMN \"updatedAt\""
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify column \"updatedAt\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "Product",
+          "updatedAt"
+        ]
+      }
+    ]
+  }
+]

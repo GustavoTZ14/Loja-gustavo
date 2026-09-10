@@ -1,8 +1,8 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
-import { redirect } from "next/navigation"
+import { redirect } from "next/navigation";
 
-export default function UserContent() {
+export default function UserContent({ userRole }: any) {
   const { data: session } = authClient.useSession();
 
   async function SignOut() {
@@ -14,6 +14,7 @@ export default function UserContent() {
       }
     })
   }
+
   return (
     <>
       <h1>Bem vindo,</h1>
@@ -21,6 +22,7 @@ export default function UserContent() {
       <span onClick={SignOut} className="cursor-pointer">
         Sair
       </span>
+      <div>{userRole === "admin" && <a href="/admin">Admin</a>}</div>
     </>
   )
 }
