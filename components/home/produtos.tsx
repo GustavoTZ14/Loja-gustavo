@@ -11,8 +11,8 @@ export default function Protutos() {
             </div>
             <div className="p-1">
               <h2 className="text-base mb-5">Colcha king Prata</h2>
-              <div className="flex justify-between gap-2">
-                <div>
+              <div className="flex justify-between">
+                <div className="flex gap-2">
                   <span className="line-through">
                     R$ 100
                   </span>

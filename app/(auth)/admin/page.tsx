@@ -17,8 +17,8 @@ export default async function Page() {
   return (
     <>
       <div>
-        {produtos.map((item) => (
-          <div>{item.name}</div>
+        {produtos.map(({id,name}) => (
+          <span key={id}>{name}</span>
         ))}
       </div>
     </>
