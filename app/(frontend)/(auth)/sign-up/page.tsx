@@ -7,38 +7,61 @@ export default function Page() {
   const [email, setEmail] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [erro, setErro] = useState<string>("");
 
   async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
+    setErro("");
 
     const { error } = await authClient.signUp.email({
       email,
       password,
       name
-    }, {
-      onSuccess: () => {
-        redirect('/sign-in')
-      }
     })
 
-    console.error(JSON.stringify(error, null, 2))
+    if(error){
+      setErro(error.message!);
+      return;
+    }
+
+    redirect('/sign-in')
   }
+
+  function formatarErro(mensagem: string): string {
+    if (mensagem.includes("[body.email]")) {
+      if (mensagem.includes("Invalid email")) return "Email inválido";
+      if (mensagem.includes("too_small")) return "Email é obrigatório";
+    }
+
+    if (mensagem.includes("[body.password]")) {
+      if (mensagem.includes("Too short")) {
+        const match = mensagem.match(/>=?(\d+)/);
+        const minChars = match ? match[1] : "8";
+        return `A senha deve ter no mínimo ${minChars} caracteres`;
+      }
+    }
+
+    if (mensagem.includes("[body.name]")) {
+      return "Nome é obrigatório";
+    }
+  }
+
   return (
-    <section>
+    <section className="flex justify-center items-center min-h-screen">
       <article>
-        <div>
-          <form onSubmit={handleSubmit}>
+        <div className="outline-1 outline-gray-300 rounded-md p-15 w-120">
+          <form onSubmit={handleSubmit} className="grid gap-2">
             <label htmlFor="name">Name</label>
-            <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+            <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Digite seu nome"  className="outline-1 outline-gray-300 rounded-md p-2 text-gray-500 text-sm"/>
 
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Digite seu email"  className="outline-1 outline-gray-300 rounded-md p-2 text-gray-500 text-sm" />
 
             <label htmlFor="senha">Senha</label>
-            <input type="password" id="senha" value={password} onChange={(e) => setPassword(e.target.value)} />
-
+            <input type="password" id="senha" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Crie uma senha"  className="outline-1 outline-gray-300 rounded-md p-2 text-gray-500 text-sm"/>
+            <div className="text-xs text-red-700">{erro}</div>
             <div>
-              <button type="submit">Registrar</button>
+              <button type="submit" className="bg-gray-700 hover:bg-gray-500 text-white w-full rounded-md h-10 cursor-pointer">Registrar</button>
             </div>
           </form>
         </div>
