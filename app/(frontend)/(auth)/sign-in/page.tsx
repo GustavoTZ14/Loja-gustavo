@@ -12,23 +12,13 @@ export default function Page() {
   async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    try{
-      const { error } = await authClient.signIn.email({
-        email,
-        password,
-      }, {
-        onSuccess: () => {
-          redirect('/sign-in')
-        }
-      })
+    const { error } = await authClient.signIn.email({ email, password });
 
-      if(error){
-        setErro("email e senha invalidos")
-      }
+    if(error){
+      setErro("email e senha invalidos")
     }
-    catch(err){
-      console.error(JSON.stringify(err, null, 2))
-    }
+
+    redirect('/usuario')
   }
   return (
     <section className="min-h-screen flex justify-center items-center">

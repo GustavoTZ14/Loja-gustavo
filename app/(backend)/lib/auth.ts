@@ -12,10 +12,10 @@ export const auth = betterAuth({
     enabled: true,
     sendResetPassword: async ({user,url}) => {
       void resend.emails.send({
-        from: 'Acme <onboarding@resend.dev>',
+        from: 'Resend <onboarding@resend.dev>',
         to: user.email!,
-        subject: 'Hello world',
-        html: `Click <a href="${url}">here</a> to reset your password.`,
+        subject: 'Redefinir Senha',
+        html: `Redefinir senha: <a href=${url}>REDEFINIR</a>`
       })
     },
     onPasswordReset: async ({ user }) => {

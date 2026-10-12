@@ -1,3 +1,5 @@
+export const instant = false;
+
 import { redirect } from "next/navigation";
 import { auth } from "../../../(backend)/lib/auth";
 import { headers } from "next/headers";
@@ -9,14 +11,14 @@ export default async function Page() {
     headers: await headers(),
   })
 
-  if (!session) redirect('/sign-in');
-
-  const user = await db.orm.public.User.where({ email: session.user.email }).first();
+  if (!session){ 
+    redirect('/sign-in');
+  }
 
   return (
     <section>
       <article>
-        <h1>Usuario {user!.name}</h1>
+        <h1>Usuario {session.user.name}</h1>
         <Signout />
       </article>
     </section>

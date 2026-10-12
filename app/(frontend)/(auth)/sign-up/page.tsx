@@ -27,25 +27,6 @@ export default function Page() {
     redirect('/sign-in')
   }
 
-  function formatarErro(mensagem: string): string {
-    if (mensagem.includes("[body.email]")) {
-      if (mensagem.includes("Invalid email")) return "Email inválido";
-      if (mensagem.includes("too_small")) return "Email é obrigatório";
-    }
-
-    if (mensagem.includes("[body.password]")) {
-      if (mensagem.includes("Too short")) {
-        const match = mensagem.match(/>=?(\d+)/);
-        const minChars = match ? match[1] : "8";
-        return `A senha deve ter no mínimo ${minChars} caracteres`;
-      }
-    }
-
-    if (mensagem.includes("[body.name]")) {
-      return "Nome é obrigatório";
-    }
-  }
-
   return (
     <section className="flex justify-center items-center min-h-screen">
       <article>

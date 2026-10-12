@@ -19,10 +19,10 @@ export const metadata: Metadata = {
 
 export default function LayoutAuth({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-[#ededed]">
+    <div lang="pt-BR" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+      <main className="min-h-full flex flex-col bg-[#ededed]">
         {children}
-      </body>
-    </html>
+      </main>
+    </div>
   )
 }
