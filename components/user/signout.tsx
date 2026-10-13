@@ -8,7 +8,7 @@ export default function Signout() {
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
-          redirect("/login"); // redirect to login page
+          redirect("/sign-in");
         },
       },
     });

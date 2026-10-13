@@ -15,10 +15,12 @@ export default async function Page() {
     redirect('/sign-in');
   }
 
+  const user = await db.orm.public.User.where({email: session.user.email!}).first();
+
   return (
     <section>
       <article>
-        <h1>Usuario {session.user.name}</h1>
+        <h1>Usuario {user!.name}</h1>
         <Signout />
       </article>
     </section>
