@@ -81,6 +81,7 @@ model Product {
   description   String
   price         Int
   sku           String
+  imagem        String?
 
   @@map("product")             
 }
