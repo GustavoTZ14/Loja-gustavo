@@ -82,6 +82,9 @@ model Product {
   price         Int
   sku           String
   imagem        String?
+  size          String?
+  assorted      Boolean             @default(true)
+  brand         String?
 
   @@map("product")             
 }

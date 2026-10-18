@@ -496,6 +496,20 @@
           },
           "Product": {
             "fields": {
+              "assorted": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/bool@1",
+                  "kind": "scalar"
+                }
+              },
+              "brand": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
               "description": {
                 "nullable": false,
                 "type": {
@@ -545,6 +559,13 @@
                   "kind": "scalar"
                 }
               },
+              "size": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
               "sku": {
                 "nullable": false,
                 "type": {
@@ -556,6 +577,12 @@
             "relations": {},
             "storage": {
               "fields": {
+                "assorted": {
+                  "column": "assorted"
+                },
+                "brand": {
+                  "column": "brand"
+                },
                 "description": {
                   "column": "description"
                 },
@@ -576,6 +603,9 @@
                 },
                 "quantity": {
                   "column": "quantity"
+                },
+                "size": {
+                  "column": "size"
                 },
                 "sku": {
                   "column": "sku"
@@ -1202,6 +1232,20 @@
             },
             "product": {
               "columns": {
+                "assorted": {
+                  "codecId": "pg/bool@1",
+                  "dataType": "pg/bool",
+                  "default": {
+                    "kind": "literal",
+                    "value": true
+                  },
+                  "nullable": false
+                },
+                "brand": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": true
+                },
                 "description": {
                   "codecId": "pg/text@1",
                   "dataType": "pg/text",
@@ -1244,6 +1288,11 @@
                     "value": 0
                   },
                   "nullable": false
+                },
+                "size": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": true
                 },
                 "sku": {
                   "codecId": "pg/text@1",
@@ -1410,7 +1459,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "e1f40801d050cda0db52214c3b7e6b80c0741da629f1baa99651684d1e4d5b45"
+    "storageHash": "122e314c0cd224718509eb294571a142b6ea0950e8862a1af2bd7892f9e86a4b"
   },
   "execution": {
     "executionHash": "576bb3c0af1bc47c05037c1c29b0170fff19089a3fd18e4370037a581fa9afde",

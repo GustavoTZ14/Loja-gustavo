@@ -18,7 +18,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'e1f40801d050cda0db52214c3b7e6b80c0741da629f1baa99651684d1e4d5b45'>;
+  StorageHashBase<'122e314c0cd224718509eb294571a142b6ea0950e8862a1af2bd7892f9e86a4b'>;
 export type ExecutionHash =
   ExecutionHashBase<'576bb3c0af1bc47c05037c1c29b0170fff19089a3fd18e4370037a581fa9afde'>;
 export type ProfileHash =
@@ -276,6 +276,8 @@ export type FieldOutputTypes = {
       readonly title: CodecTypes['pg/text@1']['output'];
     };
     readonly Product: {
+      readonly assorted: CodecTypes['pg/bool@1']['output'];
+      readonly brand: CodecTypes['pg/text@1']['output'] | null;
       readonly description: CodecTypes['pg/text@1']['output'];
       readonly id: CodecTypes['pg/int4@1']['output'];
       readonly imagem: CodecTypes['pg/text@1']['output'] | null;
@@ -283,6 +285,7 @@ export type FieldOutputTypes = {
       readonly name: CodecTypes['pg/text@1']['output'];
       readonly price: CodecTypes['pg/int4@1']['output'];
       readonly quantity: CodecTypes['pg/int4@1']['output'];
+      readonly size: CodecTypes['pg/text@1']['output'] | null;
       readonly sku: CodecTypes['pg/text@1']['output'];
     };
     readonly Session: {
@@ -349,6 +352,8 @@ export type FieldInputTypes = {
       readonly title: CodecTypes['pg/text@1']['input'];
     };
     readonly Product: {
+      readonly assorted: CodecTypes['pg/bool@1']['input'];
+      readonly brand: CodecTypes['pg/text@1']['input'] | null;
       readonly description: CodecTypes['pg/text@1']['input'];
       readonly id: CodecTypes['pg/int4@1']['input'];
       readonly imagem: CodecTypes['pg/text@1']['input'] | null;
@@ -356,6 +361,7 @@ export type FieldInputTypes = {
       readonly name: CodecTypes['pg/text@1']['input'];
       readonly price: CodecTypes['pg/int4@1']['input'];
       readonly quantity: CodecTypes['pg/int4@1']['input'];
+      readonly size: CodecTypes['pg/text@1']['input'] | null;
       readonly sku: CodecTypes['pg/text@1']['input'];
     };
     readonly Session: {
@@ -422,6 +428,8 @@ export type StorageColumnTypes = {
       readonly title: CodecTypes['pg/text@1']['output'];
     };
     readonly product: {
+      readonly assorted: CodecTypes['pg/bool@1']['output'];
+      readonly brand: CodecTypes['pg/text@1']['output'] | null;
       readonly description: CodecTypes['pg/text@1']['output'];
       readonly id: CodecTypes['pg/int4@1']['output'];
       readonly imagem: CodecTypes['pg/text@1']['output'] | null;
@@ -429,6 +437,7 @@ export type StorageColumnTypes = {
       readonly name: CodecTypes['pg/text@1']['output'];
       readonly price: CodecTypes['pg/int4@1']['output'];
       readonly quantity: CodecTypes['pg/int4@1']['output'];
+      readonly size: CodecTypes['pg/text@1']['output'] | null;
       readonly sku: CodecTypes['pg/text@1']['output'];
     };
     readonly session: {
@@ -495,6 +504,8 @@ export type StorageColumnInputTypes = {
       readonly title: CodecTypes['pg/text@1']['input'];
     };
     readonly product: {
+      readonly assorted: CodecTypes['pg/bool@1']['input'];
+      readonly brand: CodecTypes['pg/text@1']['input'] | null;
       readonly description: CodecTypes['pg/text@1']['input'];
       readonly id: CodecTypes['pg/int4@1']['input'];
       readonly imagem: CodecTypes['pg/text@1']['input'] | null;
@@ -502,6 +513,7 @@ export type StorageColumnInputTypes = {
       readonly name: CodecTypes['pg/text@1']['input'];
       readonly price: CodecTypes['pg/int4@1']['input'];
       readonly quantity: CodecTypes['pg/int4@1']['input'];
+      readonly size: CodecTypes['pg/text@1']['input'] | null;
       readonly sku: CodecTypes['pg/text@1']['input'];
     };
     readonly session: {
@@ -577,6 +589,8 @@ export namespace Models {
     readonly [RelationKeys]?: 'orders';
   };
   export type public_Product = {
+    assorted: CodecTypes['pg/bool@1']['output'];
+    brand: CodecTypes['pg/text@1']['output'] | null;
     description: CodecTypes['pg/text@1']['output'];
     id: CodecTypes['pg/int4@1']['output'];
     imagem: CodecTypes['pg/text@1']['output'] | null;
@@ -584,6 +598,7 @@ export namespace Models {
     name: CodecTypes['pg/text@1']['output'];
     price: CodecTypes['pg/int4@1']['output'];
     quantity: CodecTypes['pg/int4@1']['output'];
+    size: CodecTypes['pg/text@1']['output'] | null;
     sku: CodecTypes['pg/text@1']['output'];
     readonly [RelationKeys]?: never;
   };
@@ -973,6 +988,22 @@ type ContractBase = Omit<
             };
             readonly product: {
               columns: {
+                readonly assorted: {
+                  readonly dataType: 'pg/bool';
+                  readonly codecId: 'pg/bool@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'literal';
+                    readonly value: DefaultLiteralValue<'pg/bool@1', true>;
+                  };
+                  readonly many: false;
+                };
+                readonly brand: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                  readonly many: false;
+                };
                 readonly description: {
                   readonly dataType: 'pg/text';
                   readonly codecId: 'pg/text@1';
@@ -1021,6 +1052,12 @@ type ContractBase = Omit<
                     readonly kind: 'literal';
                     readonly value: DefaultLiteralValue<'pg/int4@1', 0>;
                   };
+                  readonly many: false;
+                };
+                readonly size: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
                   readonly many: false;
                 };
                 readonly sku: {
@@ -1469,6 +1506,14 @@ type ContractBase = Omit<
           };
           readonly Product: {
             readonly fields: {
+              readonly assorted: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/bool@1' };
+              };
+              readonly brand: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
               readonly description: {
                 readonly nullable: false;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
@@ -1497,6 +1542,10 @@ type ContractBase = Omit<
                 readonly nullable: false;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
               };
+              readonly size: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
               readonly sku: {
                 readonly nullable: false;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
@@ -1507,6 +1556,8 @@ type ContractBase = Omit<
               readonly table: 'product';
               readonly namespaceId: 'public';
               readonly fields: {
+                readonly assorted: { readonly column: 'assorted' };
+                readonly brand: { readonly column: 'brand' };
                 readonly description: { readonly column: 'description' };
                 readonly id: { readonly column: 'id' };
                 readonly imagem: { readonly column: 'imagem' };
@@ -1514,6 +1565,7 @@ type ContractBase = Omit<
                 readonly name: { readonly column: 'name' };
                 readonly price: { readonly column: 'price' };
                 readonly quantity: { readonly column: 'quantity' };
+                readonly size: { readonly column: 'size' };
                 readonly sku: { readonly column: 'sku' };
               };
             };

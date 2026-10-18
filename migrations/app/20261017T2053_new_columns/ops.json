@@ -1,0 +1,128 @@
+[
+  {
+    "id": "column.public.product.assorted",
+    "label": "Add column \"assorted\" to \"product\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "column",
+        "name": "assorted",
+        "table": "product"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure column \"assorted\" is missing",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "product",
+          "assorted"
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add column \"assorted\"",
+        "sql": "ALTER TABLE \"public\".\"product\" ADD COLUMN \"assorted\" bool DEFAULT true NOT NULL"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify column \"assorted\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "product",
+          "assorted"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "column.public.product.brand",
+    "label": "Add column \"brand\" to \"product\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "column",
+        "name": "brand",
+        "table": "product"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure column \"brand\" is missing",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "product",
+          "brand"
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add column \"brand\"",
+        "sql": "ALTER TABLE \"public\".\"product\" ADD COLUMN \"brand\" text"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify column \"brand\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "product",
+          "brand"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "column.public.product.size",
+    "label": "Add column \"size\" to \"product\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "column",
+        "name": "size",
+        "table": "product"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure column \"size\" is missing",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "product",
+          "size"
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add column \"size\"",
+        "sql": "ALTER TABLE \"public\".\"product\" ADD COLUMN \"size\" text"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify column \"size\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "product",
+          "size"
+        ]
+      }
+    ]
+  }
+]
