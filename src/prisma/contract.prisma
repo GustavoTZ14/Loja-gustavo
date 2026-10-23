@@ -1,9 +1,10 @@
 // use prisma-8
 
 model User {
-  id            Int    @id
+  id            Int    @id @default(autoincrement())
   name          String
   email         String
+  emailVerified Boolean?
   image         String?
   createdAt     TimestamptzString @default(now())
   updatedAt     temporal.updatedAtString()
@@ -11,13 +12,14 @@ model User {
   accounts      Account[]
   orders        Order[]
   cadastro      CadastroUser?
+  favorites     Favorite[]
 
   @@unique([email])
   @@map("user")
 }
 
 model Session {
-  id        Int   @id
+  id        Int   @id @default(autoincrement())
   expiresAt TimestamptzString
   token     String
   createdAt TimestamptzString @default(now())
@@ -32,7 +34,7 @@ model Session {
 }
 
 model Account {
-  id                    Int    @id
+  id                    Int    @id @default(autoincrement())
   accountId             String
   providerId            String
   userId                Int
@@ -48,6 +50,17 @@ model Account {
   updatedAt             temporal.updatedAtString()
 
   @@map("account")
+}
+
+model Verification {
+  id         Int    @id @default(autoincrement())
+  identifier String
+  value      String
+  expiresAt  TimestamptzString
+  createdAt  TimestamptzString?
+  updatedAt  TimestamptzString?
+
+  @@map("verification")
 }
 
 model OrderStatus {
@@ -76,15 +89,20 @@ model Order {
 model Product {
   id            Int                 @id @default(autoincrement())
   name          String
-  modelo        String
+  model         String
   quantity      Int                 @default(0)
   description   String
   price         Int
   sku           String
-  imagem        String?
+  image         String?
   size          String?
   assorted      Boolean             @default(true)
   brand         String?
+  isFeatured    Boolean             @default(false)
+  isBestSeller  Boolean             @default(false)
+  isOnSale      Boolean             @default(false)
+  isNewArrival  Boolean             @default(false)
+  favorites     Favorite[]
 
   @@map("product")             
 }
@@ -104,4 +122,19 @@ model CadastroUser {
   userId        Int                 @unique
 
   @@map("cadastro")
+}
+
+model Favorite {
+  id            Int                 @id @default(autoincrement())
+  userId        Int
+  productId     Int
+  createdAt     DateTime            @default(now())
+
+  user          User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product       Product             @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+  @@index([productId])
+
+  @@map("favorites")
 }
