@@ -4,7 +4,7 @@ export default function Page() {
   return (
     <section>
       <article className='grid grid-cols-5'>
-        <nav className='col-span-4 flex gap-2 items-center text-sm font-bold text-[#755a4b]'>
+        <nav className='col-span-4 flex gap-2 items-center text-sm font-bold text-[#755a4b] bg-[#f4f0ec]'>
           <div className='w-30 text-center uppercase'>
             <span>Cama</span>
           </div>

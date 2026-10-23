@@ -26,8 +26,8 @@ export default function Page() {
         <div>
           <form className='flex w-150 outline-1 outline-gray-300 rounded-4xl h-10'>
             <input type="text" className='w-full h-full text-sm text-gray-700 pl-4 outline-hidden' placeholder='O que você está buscando?' />
-            <div className='w-10 flex justify-center items-center'>
-              <Search size={20} className='text-gray-500' />
+            <div className='w-10 pr-2 flex justify-center items-center'>
+              <Search size={20} className='text-gray-400' />
             </div>
           </form>
         </div>
