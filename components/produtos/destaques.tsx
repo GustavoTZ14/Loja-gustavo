@@ -2,6 +2,7 @@ import { db } from "@/src/prisma/db";
 import Image from "next/image";
 
 export default async function Page() {
+  "use cache";
   const produtos = await db.orm.public.Product.where({ isFeatured: true }).all();
 
   return (
