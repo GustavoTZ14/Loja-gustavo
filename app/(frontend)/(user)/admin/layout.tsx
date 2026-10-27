@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 export default function LayoutAuth({ children }: { children: React.ReactNode }) {
   return (
     <div lang="pt-BR" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <main className="min-h-full grid grid-cols-2 bg-[#ededed]">
+      <main className="min-h-screen grid grid-cols-2 bg-[#ededed]">
         <MenuLateral />
         {children}
       </main>
