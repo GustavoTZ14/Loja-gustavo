@@ -11,7 +11,6 @@ export default function Home() {
       <HeroImage />
       <Categorias />
       <InfoHome />
-      <Destaques />
     </>
   );
 }

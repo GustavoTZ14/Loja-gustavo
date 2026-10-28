@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../../../globals.css";
-import MenuLateral from "@/components/admin/menu-lateral";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,8 +20,7 @@ export const metadata: Metadata = {
 export default function LayoutAuth({ children }: { children: React.ReactNode }) {
   return (
     <div lang="pt-BR" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <main className="min-h-screen grid grid-cols-2 bg-[#ededed]">
-        <MenuLateral />
+      <main className="min-h-screen bg-[#ededed]">
         {children}
       </main>
     </div>
